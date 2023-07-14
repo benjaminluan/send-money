@@ -15,36 +15,38 @@ function App() {
 
   useEffect(() => {
     const getRates = () => {
+      console.log('do we go in here')
       axios.get('https://api.apilayer.com/fixer/latest?base=USD&apikey=OzPZ6I3SUajUXPLEQVHFIIakfURg3hVb')
-          .then(res => {
-              setRates(res.data.rates);
-          })
-          .catch(error => console.log('error', error));
-        }
-        return () => getRates();
-  },[])
+        .then(res => {
+          console.log(res, 'What is result')
+          setRates(res.data.rates);
+        })
+        .catch(error => console.log('error', error));
+    }
+    return () => getRates();
+  }, [])
 
-  const Wrapper = ({children}) => {
+  const Wrapper = ({ children }) => {
     const location = useLocation();
     useLayoutEffect(() => {
       document.documentElement.scrollTo(0, 0);
     }, [location.pathname]);
     return children
-  } 
+  }
 
   const format = (num) => {
-    return num.toLocaleString(undefined, {maximumFractionDigits:2});
+    return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
 
   return (
     <div className="App">
-      <BrowserRouter> 
+      <BrowserRouter>
         <Wrapper>
           <Navbar />
           <Routes>
             <Route path="/" element={<Navigate to="/send-money" replace={true} />} />
-            <Route path="/send-money" element={<Home format={format} rates={rates}/>} />
-            <Route path="/transactions" element={<TransactionsPage format={format} rates={rates}/>} />
+            <Route path="/send-money" element={<Home format={format} rates={rates} />} />
+            <Route path="/transactions" element={<TransactionsPage format={format} rates={rates} />} />
             <Route path="/send" element={<Send format={format} rates={rates} />} />
           </Routes>
         </Wrapper>
