@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/send-money">
         <Wrapper>
           <Navbar />
           <Routes>
