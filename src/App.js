@@ -14,7 +14,6 @@ function App() {
   // OzPZ6I3SUajUXPLEQVHFIIakfURg3hVb
   console.log("Are we even in the App???")
   useEffect(() => {
-    console.log("Use Effect Fired?")
     const getRates = () => {
       console.log('do we go in here')
       axios.get('https://api.apilayer.com/fixer/latest?base=USD&apikey=OzPZ6I3SUajUXPLEQVHFIIakfURg3hVb')
@@ -24,6 +23,7 @@ function App() {
         })
         .catch(error => console.log('error', error));
     }
+    getRates()
     return () => getRates();
   }, [])
 
